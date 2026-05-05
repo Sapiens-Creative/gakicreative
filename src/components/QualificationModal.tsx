@@ -223,7 +223,7 @@ export default function QualificationModal() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25 }}
               >
-                <h2 className="t-card-title" style={{ marginBottom: "40px", color: "var(--c-text)", lineHeight: 1.35, fontWeight: 400 }}>
+                <h2 className="t-card-title" style={{ marginBottom: "40px", color: "var(--foreground)", lineHeight: 1.35, fontWeight: 400 }}>
                   {q.text}
                 </h2>
 
