@@ -108,7 +108,7 @@ export default function QualificationModal() {
         exit={{ opacity: 0, scale: 0.96, y: 30 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} // Custom spring-like easing
         style={{
-          backgroundColor: "var(--background)",
+          backgroundColor: "var(--c-bg)",
           width: "100%",
           maxWidth: "640px", // Slightly wider for better text flow
           borderRadius: "12px",
