@@ -239,7 +239,7 @@ export default function QualificationModal() {
                         style={{
                           textAlign: "left",
                           padding: "18px 24px",
-                          backgroundColor: "var(--card)",
+                          backgroundColor: "var(--c-bg)",
                           border: "1px solid var(--border)",
                           borderRadius: "12px",
                           color: "var(--card-foreground)",
