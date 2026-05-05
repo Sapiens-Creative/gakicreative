@@ -121,7 +121,7 @@ export default function QualificationModal() {
         }}
       >
         {/* Header / Progress */}
-        <div style={{ padding: "24px 32px", borderBottom: "1px solid rgba(0,0,0,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ padding: "24px 32px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ flex: 1, marginRight: "32px" }}>
             <div style={{ height: "3px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "3px", overflow: "hidden" }}>
               <motion.div 
