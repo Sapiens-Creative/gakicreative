@@ -123,12 +123,12 @@ export default function QualificationModal() {
         {/* Header / Progress */}
         <div style={{ padding: "24px 32px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ flex: 1, marginRight: "32px" }}>
-            <div style={{ height: "3px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "3px", overflow: "hidden" }}>
+            <div style={{ height: "3px", backgroundColor: "var(--border)", borderRadius: "3px", overflow: "hidden" }}>
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ height: "100%", backgroundColor: "var(--c-primary)", boxShadow: "0 0 10px var(--c-primary)" }}
+                style={{ height: "100%", backgroundColor: "var(--primary)", boxShadow: "0 0 10px var(--primary)" }}
               />
             </div>
             {!rejection && !isFinished && (
