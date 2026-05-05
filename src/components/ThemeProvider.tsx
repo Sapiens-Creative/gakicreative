@@ -30,6 +30,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(t);
     document.documentElement.setAttribute("data-theme", t);
     document.body.setAttribute("data-theme", t);
+    if (t === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, []);
 
   const toggle = useCallback(() => {
