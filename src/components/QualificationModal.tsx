@@ -297,8 +297,8 @@ export default function QualificationModal() {
                         transition: "border-color 0.2s ease, background-color 0.2s ease"
                       }}
                       onFocus={(e) => {
-                        e.currentTarget.style.borderColor = "var(--c-primary)";
-                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.borderColor = "var(--primary)";
+                        e.currentTarget.style.backgroundColor = "var(--background)";
                       }}
                       onBlur={(e) => {
                         e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)";
