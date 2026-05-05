@@ -121,18 +121,18 @@ export default function QualificationModal() {
         }}
       >
         {/* Header / Progress */}
-        <div style={{ padding: "24px 32px", borderBottom: "1px solid rgba(0,0,0,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ padding: "24px 32px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ flex: 1, marginRight: "32px" }}>
-            <div style={{ height: "3px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "3px", overflow: "hidden" }}>
+            <div style={{ height: "3px", backgroundColor: "var(--border)", borderRadius: "3px", overflow: "hidden" }}>
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ height: "100%", backgroundColor: "var(--c-primary)", boxShadow: "0 0 10px var(--c-primary)" }}
+                style={{ height: "100%", backgroundColor: "var(--primary)", boxShadow: "0 0 10px var(--primary)" }}
               />
             </div>
             {!rejection && !isFinished && (
-              <p style={{ fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--c-text)", opacity: 0.4, marginTop: "12px", fontFamily: "var(--font-sans)", fontWeight: 500 }}>
+              <p style={{ fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--foreground)", opacity: 0.4, marginTop: "12px", fontFamily: "var(--font-sans)", fontWeight: 500 }}>
                 Etapa {currentIndex + 1} de {qualificationQuestions.length}
               </p>
             )}
@@ -140,7 +140,7 @@ export default function QualificationModal() {
           <button 
             onClick={closeModal}
             aria-label="Fechar"
-            style={{ background: "none", border: "none", fontSize: "28px", lineHeight: 1, color: "var(--c-text)", cursor: "pointer", opacity: 0.3, transition: "opacity 0.2s" }}
+            style={{ background: "none", border: "none", fontSize: "28px", lineHeight: 1, color: "var(--foreground)", cursor: "pointer", opacity: 0.3, transition: "opacity 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
           >
@@ -158,16 +158,16 @@ export default function QualificationModal() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
               >
-                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--c-text)" }}>Pausa.</h3>
-                <p className="t-body" style={{ color: "var(--c-text)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
+                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--foreground)" }}>Pausa.</h3>
+                <p className="t-body" style={{ color: "var(--foreground)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
                   {rejection === "triagem" ? REJECTION_MESSAGE_TRIAGEM : REJECTION_MESSAGE_INVESTIMENTO}
                 </p>
                 <button
                   onClick={closeModal}
                   style={{
                     padding: "16px 32px",
-                    backgroundColor: "var(--c-text)",
-                    color: "var(--c-bg)",
+                    backgroundColor: "var(--primary)",
+                    color: "var(--primary-foreground)",
                     border: "none",
                     borderRadius: "4px",
                     fontFamily: "var(--font-sans)",
@@ -187,8 +187,8 @@ export default function QualificationModal() {
                 exit={{ opacity: 0, x: -20 }}
                 style={{ textAlign: "center" }}
               >
-                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--c-text)" }}>Tudo certo.</h3>
-                <p className="t-body" style={{ color: "var(--c-text)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
+                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--foreground)" }}>Tudo certo.</h3>
+                <p className="t-body" style={{ color: "var(--foreground)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
                   Seu perfil foi mapeado. Clique abaixo para enviar essas informações diretamente para o nosso WhatsApp e iniciarmos a conversa.
                 </p>
                 <a
@@ -223,7 +223,7 @@ export default function QualificationModal() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25 }}
               >
-                <h2 className="t-card-title" style={{ marginBottom: "40px", color: "var(--c-text)", lineHeight: 1.35, fontWeight: 400 }}>
+                <h2 className="t-card-title" style={{ marginBottom: "40px", color: "var(--foreground)", lineHeight: 1.35, fontWeight: 400 }}>
                   {q.text}
                 </h2>
 
@@ -239,27 +239,29 @@ export default function QualificationModal() {
                         style={{
                           textAlign: "left",
                           padding: "18px 24px",
-                          backgroundColor: "rgba(0,0,0,0.015)",
-                          border: "1px solid rgba(0,0,0,0.06)",
-                          borderRadius: "8px",
+                          backgroundColor: "var(--c-bg)",
+                          border: "1px solid var(--c-border)",
+                          borderRadius: "12px",
                           color: "var(--c-text)",
                           fontFamily: "var(--font-sans)",
-                          fontSize: "14px",
+                          fontSize: "15px",
                           lineHeight: 1.5,
                           cursor: "pointer",
-                          transition: "all 0.2s ease",
+                          transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                           display: "flex",
                           alignItems: "center",
                           gap: "16px"
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.borderColor = "var(--c-primary)";
-                          e.currentTarget.style.backgroundColor = "rgba(46, 125, 95, 0.04)";
-                          e.currentTarget.style.transform = "translateX(4px)";
+                          e.currentTarget.style.backgroundColor = "var(--c-primary)";
+                          e.currentTarget.style.color = "var(--c-text-inv)";
+                          e.currentTarget.style.transform = "translateX(8px)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)";
-                          e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.015)";
+                          e.currentTarget.style.borderColor = "var(--c-border)";
+                          e.currentTarget.style.backgroundColor = "var(--c-bg)";
+                          e.currentTarget.style.color = "var(--c-text)";
                           e.currentTarget.style.transform = "translateX(0px)";
                         }}
                       >
@@ -285,9 +287,9 @@ export default function QualificationModal() {
                         width: "100%",
                         minHeight: "140px",
                         padding: "20px",
-                        backgroundColor: "rgba(0,0,0,0.015)",
-                        border: "1px solid rgba(0,0,0,0.06)",
-                        borderRadius: "8px",
+                        backgroundColor: "var(--c-bg)",
+                        border: "1px solid var(--c-border)",
+                        borderRadius: "12px",
                         color: "var(--c-text)",
                         fontFamily: "var(--font-sans)",
                         fontSize: "15px",
@@ -297,12 +299,12 @@ export default function QualificationModal() {
                         transition: "border-color 0.2s ease, background-color 0.2s ease"
                       }}
                       onFocus={(e) => {
-                        e.currentTarget.style.borderColor = "var(--c-primary)";
-                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.borderColor = "var(--primary)";
+                        e.currentTarget.style.backgroundColor = "var(--background)";
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)";
-                        e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.015)";
+                        e.currentTarget.style.borderColor = "var(--border)";
+                        e.currentTarget.style.backgroundColor = "var(--muted)";
                       }}
                       autoFocus
                     />
@@ -311,8 +313,8 @@ export default function QualificationModal() {
                       disabled={!textInput.trim()}
                       style={{
                         padding: "18px",
-                        backgroundColor: textInput.trim() ? "var(--c-text)" : "rgba(0,0,0,0.06)",
-                        color: textInput.trim() ? "var(--c-bg)" : "var(--c-text)",
+                        backgroundColor: textInput.trim() ? "var(--c-primary)" : "var(--c-border)",
+                        color: textInput.trim() ? "var(--c-text-inv)" : "var(--c-text-muted)",
                         opacity: textInput.trim() ? 1 : 0.5,
                         border: "none",
                         borderRadius: "8px",
