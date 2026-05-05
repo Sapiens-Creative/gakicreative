@@ -166,8 +166,8 @@ export default function QualificationModal() {
                   onClick={closeModal}
                   style={{
                     padding: "16px 32px",
-                    backgroundColor: "var(--c-text)",
-                    color: "var(--c-bg)",
+                    backgroundColor: "var(--primary)",
+                    color: "var(--primary-foreground)",
                     border: "none",
                     borderRadius: "4px",
                     fontFamily: "var(--font-sans)",
