@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/context/ModalContext";
 import {
@@ -18,6 +18,14 @@ export default function QualificationModal() {
   const [isFinished, setIsFinished] = useState(false);
   
   const [textInput, setTextInput] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top when question changes
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [currentIndex, rejection, isFinished]);
 
   // Prevent scroll when open
   useEffect(() => {
@@ -150,6 +158,7 @@ export default function QualificationModal() {
 
         {/* Content */}
         <div 
+          ref={scrollRef}
           data-lenis-prevent
           style={{ 
             padding: "clamp(24px, 6vw, 48px) clamp(16px, 5vw, 32px)", 
