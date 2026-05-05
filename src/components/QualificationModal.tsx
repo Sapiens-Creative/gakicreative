@@ -313,8 +313,8 @@ export default function QualificationModal() {
                       disabled={!textInput.trim()}
                       style={{
                         padding: "18px",
-                        backgroundColor: textInput.trim() ? "var(--primary)" : "var(--muted)",
-                        color: textInput.trim() ? "var(--primary-foreground)" : "var(--muted-foreground)",
+                        backgroundColor: textInput.trim() ? "var(--c-primary)" : "var(--c-border)",
+                        color: textInput.trim() ? "var(--c-text-inv)" : "var(--c-text-muted)",
                         opacity: textInput.trim() ? 1 : 0.5,
                         border: "none",
                         borderRadius: "8px",
