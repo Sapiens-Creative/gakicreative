@@ -253,13 +253,15 @@ export default function QualificationModal() {
                           gap: "16px"
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "var(--primary)";
-                          e.currentTarget.style.backgroundColor = "var(--accent)";
+                          e.currentTarget.style.borderColor = "var(--c-primary)";
+                          e.currentTarget.style.backgroundColor = "var(--c-primary)";
+                          e.currentTarget.style.color = "var(--c-text-inv)";
                           e.currentTarget.style.transform = "translateX(8px)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "var(--border)";
-                          e.currentTarget.style.backgroundColor = "var(--muted)";
+                          e.currentTarget.style.borderColor = "var(--c-border)";
+                          e.currentTarget.style.backgroundColor = "var(--c-bg)";
+                          e.currentTarget.style.color = "var(--c-text)";
                           e.currentTarget.style.transform = "translateX(0px)";
                         }}
                       >
