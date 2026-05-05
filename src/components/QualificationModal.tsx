@@ -140,7 +140,7 @@ export default function QualificationModal() {
           <button 
             onClick={closeModal}
             aria-label="Fechar"
-            style={{ background: "none", border: "none", fontSize: "28px", lineHeight: 1, color: "var(--c-text)", cursor: "pointer", opacity: 0.3, transition: "opacity 0.2s" }}
+            style={{ background: "none", border: "none", fontSize: "28px", lineHeight: 1, color: "var(--foreground)", cursor: "pointer", opacity: 0.3, transition: "opacity 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
           >
