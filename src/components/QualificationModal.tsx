@@ -240,7 +240,7 @@ export default function QualificationModal() {
                           textAlign: "left",
                           padding: "18px 24px",
                           backgroundColor: "var(--c-bg)",
-                          border: "1px solid var(--border)",
+                          border: "1px solid var(--c-border)",
                           borderRadius: "12px",
                           color: "var(--c-text)",
                           fontFamily: "var(--font-sans)",
