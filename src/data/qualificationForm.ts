@@ -21,7 +21,7 @@ export const qualificationQuestions: Question[] = [
   // BLOCO 1
   {
     id: "p1",
-    text: "Como você descreveria o momento atual do seu negócio? Esta é uma pergunta bem longa para testar a rolagem do formulário em dispositivos móveis e garantir que tudo apareça corretamente sem ser cortado. Precisamos ter certeza de que o usuário consegue ler todo o conteúdo e selecionar uma opção sem dificuldades, mesmo em telas pequenas.",
+    text: "Como você descreveria o momento atual do seu negócio?",
     type: "single",
     options: [
       { id: "A", label: "Estou começando agora, ainda estruturando o produto ou serviço" },
