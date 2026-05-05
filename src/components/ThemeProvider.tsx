@@ -43,6 +43,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem("gaki-theme", next);
       document.documentElement.setAttribute("data-theme", next);
       document.body.setAttribute("data-theme", next);
+      if (next === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
       return next;
     });
   }, []);
