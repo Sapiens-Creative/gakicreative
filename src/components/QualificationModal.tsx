@@ -258,8 +258,8 @@ export default function QualificationModal() {
                           e.currentTarget.style.transform = "translateX(8px)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)";
-                          e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.015)";
+                          e.currentTarget.style.borderColor = "var(--border)";
+                          e.currentTarget.style.backgroundColor = "var(--muted)";
                           e.currentTarget.style.transform = "translateX(0px)";
                         }}
                       >
