@@ -242,7 +242,7 @@ export default function QualificationModal() {
                           backgroundColor: "var(--card)",
                           border: "1px solid var(--border)",
                           borderRadius: "12px",
-                          color: "var(--foreground)",
+                          color: "var(--card-foreground)",
                           fontFamily: "var(--font-sans)",
                           fontSize: "15px",
                           lineHeight: 1.5,
