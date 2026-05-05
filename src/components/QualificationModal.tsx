@@ -117,11 +117,11 @@ export default function QualificationModal() {
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          maxHeight: "90vh",
+          maxHeight: "min(90vh, 850px)",
         }}
       >
         {/* Header / Progress */}
-        <div style={{ padding: "24px 32px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ padding: "clamp(16px, 4vw, 24px) clamp(16px, 5vw, 32px)", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ flex: 1, marginRight: "32px" }}>
             <div style={{ height: "3px", backgroundColor: "var(--border)", borderRadius: "3px", overflow: "hidden" }}>
               <motion.div 
@@ -149,7 +149,16 @@ export default function QualificationModal() {
         </div>
 
         {/* Content */}
-        <div style={{ padding: "clamp(32px, 5vw, 48px) 32px", overflowY: "auto", flex: 1 }}>
+        <div 
+          data-lenis-prevent
+          style={{ 
+            padding: "clamp(24px, 6vw, 48px) clamp(16px, 5vw, 32px)", 
+            overflowY: "auto", 
+            flex: 1,
+            WebkitOverflowScrolling: "touch",
+            overscrollBehavior: "contain"
+          }}
+        >
           <AnimatePresence mode="wait">
             {rejection ? (
               <motion.div
