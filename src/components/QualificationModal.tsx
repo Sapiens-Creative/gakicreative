@@ -158,8 +158,8 @@ export default function QualificationModal() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
               >
-                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--c-text)" }}>Pausa.</h3>
-                <p className="t-body" style={{ color: "var(--c-text)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
+                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--foreground)" }}>Pausa.</h3>
+                <p className="t-body" style={{ color: "var(--foreground)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
                   {rejection === "triagem" ? REJECTION_MESSAGE_TRIAGEM : REJECTION_MESSAGE_INVESTIMENTO}
                 </p>
                 <button
