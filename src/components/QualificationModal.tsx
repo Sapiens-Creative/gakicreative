@@ -132,7 +132,7 @@ export default function QualificationModal() {
               />
             </div>
             {!rejection && !isFinished && (
-              <p style={{ fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--c-text)", opacity: 0.4, marginTop: "12px", fontFamily: "var(--font-sans)", fontWeight: 500 }}>
+              <p style={{ fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--foreground)", opacity: 0.4, marginTop: "12px", fontFamily: "var(--font-sans)", fontWeight: 500 }}>
                 Etapa {currentIndex + 1} de {qualificationQuestions.length}
               </p>
             )}
