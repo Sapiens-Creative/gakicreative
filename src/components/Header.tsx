@@ -35,7 +35,7 @@ export default function Header() {
           }
         });
       },
-      { rootMargin: "-40% 0px -60% 0px" }
+      { rootMargin: "-20% 0px -80% 0px" }
     );
 
     links.forEach((link) => {
