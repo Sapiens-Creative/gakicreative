@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
-import AnimatedText from "./AnimatedText";
 
 const services = [
   {

@@ -27,6 +27,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const saved = localStorage.getItem("gaki-theme") as Theme | null;
     const t = saved ?? "light";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(t);
     document.documentElement.setAttribute("data-theme", t);
     document.body.setAttribute("data-theme", t);

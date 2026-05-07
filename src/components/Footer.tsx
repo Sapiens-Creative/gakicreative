@@ -255,6 +255,7 @@ export default function Footer() {
 
         {/* Logo e Copyright */}
         <div style={{ marginTop: "clamp(32px, 5vw, 60px)" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/gaki-logo.svg"
             alt="Gaki Logo"

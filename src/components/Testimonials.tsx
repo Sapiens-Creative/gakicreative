@@ -202,7 +202,7 @@ export default function Testimonials() {
                     marginBottom: "16px",
                   }}
                 >
-                  "
+                  &quot;
                 </span>
 
                 <blockquote

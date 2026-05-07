@@ -78,6 +78,7 @@ export default function Header() {
       >
         {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/gaki-logo.svg"
             alt="Gaki Logo"
