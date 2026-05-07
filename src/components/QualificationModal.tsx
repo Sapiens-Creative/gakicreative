@@ -130,9 +130,9 @@ export default function QualificationModal() {
         }}
       >
         {/* Header / Progress */}
-        <div style={{ padding: "clamp(16px, 4vw, 24px) clamp(16px, 5vw, 32px)", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ padding: "clamp(16px, 4vw, 24px) clamp(16px, 5vw, 32px)", borderBottom: "1px solid rgba(255, 255, 255, 0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ flex: 1, marginRight: "32px" }}>
-            <div style={{ height: "3px", backgroundColor: "var(--border)", borderRadius: "3px", overflow: "hidden" }}>
+            <div style={{ height: "3px", backgroundColor: "rgba(255, 255, 255, 0.05)", borderRadius: "3px", overflow: "hidden" }}>
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
