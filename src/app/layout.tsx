@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Google_Sans, Ovo } from "next/font/google";
+import { Ovo } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const googleSans = Google_Sans({
+const ovo = Ovo({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-sans",
+  weight: "400",
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -75,7 +75,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={cn("font-sans", googleSans.variable, ovo.variable)}
+      className={cn("font-sans", ovo.variable)}
     >
       <body data-theme="light">{children}</body>
     </html>
