@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { ThemeProvider } from "@/components/ThemeProvider";
 import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
