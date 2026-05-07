@@ -10,13 +10,6 @@ const ovo = Ovo({
   display: "swap",
 });
 
-const ovo = Ovo({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-serif",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "GAKI — Comunicação Estratégica",
   description:
