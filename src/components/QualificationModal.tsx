@@ -116,16 +116,17 @@ export default function QualificationModal() {
         exit={{ opacity: 0, scale: 0.96, y: 30 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} // Custom spring-like easing
         style={{
-          backgroundColor: "var(--c-bg)",
+          backgroundColor: "#0A0F0C", // Explicit dark background matching the brand
           width: "100%",
-          maxWidth: "640px", // Slightly wider for better text flow
+          maxWidth: "640px",
           borderRadius: "12px",
-          boxShadow: "0 24px 64px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1)", // Premium shadow
+          boxShadow: "0 24px 64px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.1)",
           overflow: "hidden",
           position: "relative",
           display: "flex",
           flexDirection: "column",
           maxHeight: "min(90vh, 850px)",
+          border: "1px solid rgba(255,255,255,0.05)",
         }}
       >
         {/* Header / Progress */}
@@ -257,10 +258,10 @@ export default function QualificationModal() {
                         style={{
                           textAlign: "left",
                           padding: "18px 24px",
-                          backgroundColor: "var(--c-bg)",
-                          border: "1px solid var(--c-border)",
+                          backgroundColor: "rgba(255, 255, 255, 0.03)",
+                          border: "1px solid rgba(255, 255, 255, 0.08)",
                           borderRadius: "12px",
-                          color: "var(--c-text)",
+                          color: "#FFFFFF",
                           fontFamily: "var(--font-sans)",
                           fontSize: "15px",
                           lineHeight: 1.5,
@@ -271,15 +272,13 @@ export default function QualificationModal() {
                           gap: "16px"
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "var(--c-primary)";
-                          e.currentTarget.style.backgroundColor = "var(--c-primary)";
-                          e.currentTarget.style.color = "var(--c-text-inv)";
+                          e.currentTarget.style.borderColor = "var(--primary)";
+                          e.currentTarget.style.backgroundColor = "rgba(183, 255, 0, 0.08)";
                           e.currentTarget.style.transform = "translateX(8px)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "var(--c-border)";
-                          e.currentTarget.style.backgroundColor = "var(--c-bg)";
-                          e.currentTarget.style.color = "var(--c-text)";
+                          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                          e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.03)";
                           e.currentTarget.style.transform = "translateX(0px)";
                         }}
                       >
@@ -305,24 +304,24 @@ export default function QualificationModal() {
                         width: "100%",
                         minHeight: "140px",
                         padding: "20px",
-                        backgroundColor: "var(--c-bg)",
-                        border: "1px solid var(--c-border)",
+                        backgroundColor: "rgba(255, 255, 255, 0.03)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
                         borderRadius: "12px",
-                        color: "var(--c-text)",
+                        color: "#FFFFFF",
                         fontFamily: "var(--font-sans)",
                         fontSize: "15px",
                         lineHeight: 1.6,
                         resize: "vertical",
                         outline: "none",
-                        transition: "border-color 0.2s ease, background-color 0.2s ease"
+                        transition: "all 0.2s ease"
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor = "var(--primary)";
-                        e.currentTarget.style.backgroundColor = "var(--background)";
+                        e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = "var(--border)";
-                        e.currentTarget.style.backgroundColor = "var(--muted)";
+                        e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                        e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.03)";
                       }}
                       autoFocus
                     />
@@ -331,8 +330,8 @@ export default function QualificationModal() {
                       disabled={!textInput.trim()}
                       style={{
                         padding: "18px",
-                        backgroundColor: textInput.trim() ? "var(--c-primary)" : "var(--c-border)",
-                        color: textInput.trim() ? "var(--c-text-inv)" : "var(--c-text-muted)",
+                        backgroundColor: textInput.trim() ? "var(--primary)" : "rgba(255, 255, 255, 0.05)",
+                        color: textInput.trim() ? "black" : "rgba(255, 255, 255, 0.3)",
                         opacity: textInput.trim() ? 1 : 0.5,
                         border: "none",
                         borderRadius: "8px",
