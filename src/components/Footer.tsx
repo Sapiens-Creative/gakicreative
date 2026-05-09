@@ -4,12 +4,15 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import { useModal } from "@/context/ModalContext";
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const { theme, toggle } = useTheme();
   const { openModal } = useModal();
+  const { isEditMode } = useSiteContent();
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -67,26 +70,27 @@ export default function Footer() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
           transition={{ duration: 0.8 }}
         >
-          <p
+          <EditableText
+            fieldPath="footer.label"
+            as="p"
             className="t-label"
             style={{ color: "var(--c-text-inv)", opacity: 0.5, marginBottom: "clamp(20px, 3vw, 32px)" }}
-          >
-            O próximo passo
-          </p>
-          <p
+            fallback="O próximo passo"
+          />
+          <EditableText
+            fieldPath="footer.headline"
+            as="p"
             className="t-headline"
             style={{ color: "var(--c-text-inv)", marginBottom: "20px" }}
-          >
-            Se fez sentido até aqui, o próximo passo é simples.
-          </p>
-          <p
+            fallback="Se fez sentido até aqui, o próximo passo é simples."
+          />
+          <EditableText
+            fieldPath="footer.body"
+            as="p"
             className="t-body"
             style={{ color: "var(--c-text-inv)", opacity: 0.65 }}
-          >
-            Uma conversa. Sem proposta genérica, sem compromisso imediato. Só um
-            bate-papo para entender onde sua comunicação está e se faz sentido
-            trabalharmos juntos.
-          </p>
+            fallback="Uma conversa. Sem proposta genérica, sem compromisso imediato. Só um bate-papo para entender onde sua comunicação está e se faz sentido trabalharmos juntos."
+          />
         </motion.div>
 
         {/* BIG CTA */}
@@ -97,8 +101,11 @@ export default function Footer() {
           transition={{ duration: 0.85, delay: 0.2 }}
         >
           <button
-            onClick={openModal}
-            style={{ textDecoration: "none", display: "inline-block", background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}
+            onClick={(e) => {
+              if (isEditMode) e.preventDefault();
+              else openModal();
+            }}
+            style={{ textDecoration: "none", display: "inline-block", background: "none", border: "none", cursor: isEditMode ? "default" : "pointer", padding: 0, textAlign: "left" }}
           >
             <h2
               className="t-mega"
@@ -110,18 +117,29 @@ export default function Footer() {
                 transition: "opacity 0.25s",
                 textShadow: "0 2px 40px rgba(0,0,0,0.25)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseEnter={(e) => { if (!isEditMode) e.currentTarget.style.opacity = "0.7"; }}
+              onMouseLeave={(e) => { if (!isEditMode) e.currentTarget.style.opacity = "1"; }}
             >
-              Vamos
+              <EditableText
+                fieldPath="footer.ctaMega1"
+                as="span"
+                fallback="Vamos"
+              />
               <br />
-              conversar?
+              <EditableText
+                fieldPath="footer.ctaMega2"
+                as="span"
+                fallback="conversar?"
+              />
             </h2>
           </button>
 
           {/* Visible Solid Button CTA */}
           <motion.button
-            onClick={openModal}
+            onClick={(e) => {
+              if (isEditMode) e.preventDefault();
+              else openModal();
+            }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -136,14 +154,18 @@ export default function Footer() {
               fontWeight: 500,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              cursor: "pointer",
+              cursor: isEditMode ? "default" : "pointer",
               boxShadow: "0 4px 24px rgba(0,0,0,0.15)",
               transition: "transform 0.2s ease, box-shadow 0.2s ease",
             }}
-            whileHover={{ scale: 1.04, boxShadow: "0 8px 32px rgba(0,0,0,0.25)" }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={!isEditMode ? { scale: 1.04, boxShadow: "0 8px 32px rgba(0,0,0,0.25)" } : {}}
+            whileTap={!isEditMode ? { scale: 0.97 } : {}}
           >
-            Entrar em contato
+            <EditableText
+              fieldPath="footer.ctaButton"
+              as="span"
+              fallback="Entrar em contato"
+            />
           </motion.button>
         </motion.div>
 
@@ -165,11 +187,14 @@ export default function Footer() {
           {/* CTAs */}
           <div style={{ display: "flex", gap: "32px", flexWrap: "wrap" }}>
             <button
-              onClick={openModal}
+              onClick={(e) => {
+                if (isEditMode) e.preventDefault();
+                else openModal();
+              }}
               style={{
                 background: "none",
                 border: "none",
-                cursor: "pointer",
+                cursor: isEditMode ? "default" : "pointer",
                 padding: 0,
                 fontFamily: "var(--font-sans)",
                 fontSize: "11px",
@@ -183,13 +208,18 @@ export default function Footer() {
                 paddingBottom: "2px",
                 transition: "opacity 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
+              onMouseEnter={(e) => { if (!isEditMode) e.currentTarget.style.opacity = "1"; }}
+              onMouseLeave={(e) => { if (!isEditMode) e.currentTarget.style.opacity = "0.8"; }}
             >
-              Quero conversar
+              <EditableText
+                fieldPath="footer.linkChat"
+                as="span"
+                fallback="Quero conversar"
+              />
             </button>
             <a
               href="#servicos"
+              onClick={(e) => { if (isEditMode) e.preventDefault(); }}
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "11px",
@@ -200,11 +230,16 @@ export default function Footer() {
                 opacity: 0.35,
                 textDecoration: "none",
                 transition: "opacity 0.2s",
+                cursor: isEditMode ? "default" : "pointer",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
+              onMouseEnter={(e) => { if (!isEditMode) e.currentTarget.style.opacity = "0.7"; }}
+              onMouseLeave={(e) => { if (!isEditMode) e.currentTarget.style.opacity = "0.35"; }}
             >
-              Ver nossos trabalhos
+              <EditableText
+                fieldPath="footer.linkWork"
+                as="span"
+                fallback="Ver nossos trabalhos"
+              />
             </a>
           </div>
 
@@ -268,7 +303,9 @@ export default function Footer() {
             }}
           />
         </div>
-        <p
+        <EditableText
+          fieldPath="footer.copyright"
+          as="p"
           style={{
             fontFamily: "var(--font-sans)",
             fontSize: "10px",
@@ -277,9 +314,8 @@ export default function Footer() {
             opacity: 0.2,
             marginTop: "8px",
           }}
-        >
-          © 2026 Gaki Comunicação Estratégica — São Paulo, Brasil
-        </p>
+          fallback="© 2026 Gaki Comunicação Estratégica — São Paulo, Brasil"
+        />
       </div>
     </footer>
   );

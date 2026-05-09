@@ -3,10 +3,14 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import AnimatedText from "./AnimatedText";
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function About() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { content, isEditMode } = useSiteContent();
+  const c = content?.about;
 
   return (
     <section
@@ -32,36 +36,62 @@ export default function About() {
       />
 
       <div className="section-inner">
-        <motion.p
-          className="t-label"
-          style={{ color: "var(--c-text)", opacity: 0.38, marginBottom: "clamp(24px, 4vw, 40px)" }}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 0.5 } : { opacity: 0 }}
           transition={{ duration: 0.7 }}
+          style={{ marginBottom: "clamp(24px, 4vw, 40px)" }}
         >
-          Quem somos
-        </motion.p>
+          <EditableText
+            fieldPath="about.label"
+            as="p"
+            className="t-label"
+            style={{ color: "var(--c-text)", opacity: 0.38 }}
+            fallback="Quem somos"
+          />
+        </motion.div>
 
         <div className="grid-2col" style={{ alignItems: "start" }}>
           {/* Left — manifesto */}
           <div>
             <div style={{ marginBottom: "clamp(20px, 3vw, 32px)" }}>
-              <AnimatedText
-                text="Gaki é um estúdio-agência de "
-                as="span"
-                className="t-headline"
-                style={{ color: "var(--c-text)", display: "inline" } as React.CSSProperties}
-                delay={0.15}
-                by="word"
-              />
-              <AnimatedText
-                text="comunicação estratégica."
-                as="span"
-                className="t-headline"
-                style={{ color: "var(--c-primary)", display: "inline" } as React.CSSProperties}
-                delay={0.4}
-                by="word"
-              />
+              {isEditMode ? (
+                <>
+                  <EditableText
+                    fieldPath="about.headline"
+                    as="span"
+                    className="t-headline"
+                    style={{ color: "var(--c-text)", display: "inline" }}
+                    fallback="Gaki é um estúdio-agência de "
+                  />{" "}
+                  <EditableText
+                    fieldPath="about.headlineHighlight"
+                    as="span"
+                    className="t-headline"
+                    style={{ color: "var(--c-primary)", display: "inline" }}
+                    fallback="comunicação estratégica."
+                  />
+                </>
+              ) : (
+                <>
+                  <AnimatedText
+                    text={c?.headline ?? "Gaki é um estúdio-agência de "}
+                    as="span"
+                    className="t-headline"
+                    style={{ color: "var(--c-text)", display: "inline" } as React.CSSProperties}
+                    delay={0.15}
+                    by="word"
+                  />
+                  <AnimatedText
+                    text={c?.headlineHighlight ?? "comunicação estratégica."}
+                    as="span"
+                    className="t-headline"
+                    style={{ color: "var(--c-primary)", display: "inline" } as React.CSSProperties}
+                    delay={0.4}
+                    by="word"
+                  />
+                </>
+              )}
             </div>
 
             <motion.div
@@ -79,13 +109,18 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.35 }}
             >
               <p>
-                Nascemos da observação de um padrão: empresas que entregam bem,
-                mas comunicam abaixo do que merecem. O problema raramente é
-                produto — é <span style={{ color: "var(--c-primary)", fontWeight: 500 }}>ausência de direção estratégica</span> na comunicação.
+                <EditableText
+                  fieldPath="about.paragraph1"
+                  as="span"
+                  fallback="Nascemos da observação de um padrão: empresas que entregam bem, mas comunicam abaixo do que merecem. O problema raramente é produto — é ausência de direção estratégica na comunicação."
+                />
               </p>
               <p>
-                Integramos diagnóstico, identidade visual, conteúdo e consultoria
-                em uma lógica única: antes de produzir qualquer coisa, <span style={{ color: "var(--c-primary)", fontWeight: 500 }}>entendemos o contexto</span>. Só então executamos.
+                <EditableText
+                  fieldPath="about.paragraph2"
+                  as="span"
+                  fallback="Integramos diagnóstico, identidade visual, conteúdo e consultoria em uma lógica única: antes de produzir qualquer coisa, entendemos o contexto. Só então executamos."
+                />
               </p>
             </motion.div>
 
@@ -108,7 +143,11 @@ export default function About() {
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
             >
-              Ver para quem trabalhamos →
+              <EditableText
+                fieldPath="about.linkText"
+                as="span"
+                fallback="Ver para quem trabalhamos →"
+              />
             </motion.a>
           </div>
 
@@ -144,7 +183,9 @@ export default function About() {
               }}
             />
 
-            <p
+            <EditableText
+              fieldPath="about.visionLabel"
+              as="p"
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "10px",
@@ -155,9 +196,8 @@ export default function About() {
                 opacity: 0.4,
                 marginBottom: "20px",
               }}
-            >
-              Nossa visão
-            </p>
+              fallback="Nossa visão"
+            />
 
             <blockquote
               style={{
@@ -172,11 +212,16 @@ export default function About() {
                 margin: 0,
               }}
             >
-              &quot;Comunicação que <span style={{ color: "var(--c-primary-light)" }}>ajuda antes de vender</span>. Que posiciona o cliente
-              como <span style={{ color: "var(--c-primary-light)" }}>protagonista</span>. Que converte pela <span style={{ color: "var(--c-primary-light)" }}>clareza</span> — não pela pressão.&quot;
+              <EditableText
+                fieldPath="about.quote"
+                as="span"
+                fallback={`"Comunicação que ajuda antes de vender. Que posiciona o cliente como protagonista. Que converte pela clareza — não pela pressão."`}
+              />
             </blockquote>
 
-            <p
+            <EditableText
+              fieldPath="about.philosophy"
+              as="p"
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "11px",
@@ -186,9 +231,8 @@ export default function About() {
                 marginTop: "24px",
                 letterSpacing: "0.06em",
               }}
-            >
-              Marketing Natural — a filosofia da Gaki
-            </p>
+              fallback="Marketing Natural — a filosofia da Gaki"
+            />
           </motion.div>
         </div>
       </div>

@@ -2,8 +2,10 @@
 
 import React, { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-const testimonials = [
+const defaultTestimonials = [
   {
     quote:
       "A Gaki não entregou só uma identidade visual — entregou clareza. Depois do processo, ficou fácil explicar para qualquer pessoa o que a gente faz e por que vale a pena.",
@@ -31,6 +33,8 @@ export default function Testimonials() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [active, setActive] = useState(0);
+  const { content } = useSiteContent();
+  const testimonials = content?.testimonials?.items || defaultTestimonials;
 
   const prev = () => setActive((a) => (a - 1 + testimonials.length) % testimonials.length);
   const next = () => setActive((a) => (a + 1) % testimonials.length);
@@ -78,19 +82,21 @@ export default function Testimonials() {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
             transition={{ duration: 0.8 }}
           >
-            <p
+            <EditableText
+              fieldPath="testimonials.label"
+              as="p"
               className="t-label"
               style={{ color: "var(--c-text-inv)", opacity: 0.35, marginBottom: "clamp(20px, 3vw, 32px)" }}
-            >
-              O que dizem
-            </p>
+              fallback="O que dizem"
+            />
 
-            <p
+            <EditableText
+              fieldPath="testimonials.headline"
+              as="p"
               className="t-headline"
               style={{ color: "var(--c-text-inv)", marginBottom: "clamp(28px, 4vw, 48px)" }}
-            >
-              Clientes que encontraram direção.
-            </p>
+              fallback="Clientes que encontraram direção."
+            />
 
             {/* Navigation */}
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
@@ -153,7 +159,7 @@ export default function Testimonials() {
 
               {/* Dots */}
               <div style={{ display: "flex", gap: "6px", marginLeft: "8px" }}>
-                {testimonials.map((_, i) => (
+                {testimonials.map((_: any, i: number) => (
                   <button
                     key={i}
                     onClick={() => setActive(i)}
@@ -220,7 +226,11 @@ export default function Testimonials() {
                     marginBottom: "clamp(20px, 3vw, 32px)",
                   }}
                 >
-                  {testimonials[active].quote}
+                  <EditableText
+                    fieldPath={`testimonials.items.${active}.quote`}
+                    as="span"
+                    fallback={testimonials[active].quote}
+                  />
                 </blockquote>
 
                 <div
@@ -250,7 +260,9 @@ export default function Testimonials() {
                   </div>
 
                   <div>
-                    <p
+                    <EditableText
+                      fieldPath={`testimonials.items.${active}.name`}
+                      as="p"
                       style={{
                         fontFamily: "var(--font-sans)",
                         fontSize: "13px",
@@ -258,9 +270,8 @@ export default function Testimonials() {
                         color: "var(--c-text-inv)",
                         opacity: 0.9,
                       }}
-                    >
-                      {testimonials[active].name}
-                    </p>
+                      fallback={testimonials[active].name}
+                    />
                     <p
                       style={{
                         fontFamily: "var(--font-sans)",
@@ -271,7 +282,17 @@ export default function Testimonials() {
                         letterSpacing: "0.04em",
                       }}
                     >
-                      {testimonials[active].role} · {testimonials[active].company}
+                      <EditableText
+                        fieldPath={`testimonials.items.${active}.role`}
+                        as="span"
+                        fallback={testimonials[active].role}
+                      />{" "}
+                      ·{" "}
+                      <EditableText
+                        fieldPath={`testimonials.items.${active}.company`}
+                        as="span"
+                        fallback={testimonials[active].company}
+                      />
                     </p>
                   </div>
                 </div>

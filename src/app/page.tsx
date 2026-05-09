@@ -14,25 +14,30 @@ import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import { ModalProvider } from "@/context/ModalContext";
 import QualificationModal from "@/components/QualificationModal";
+import { SiteContentProvider } from "@/context/SiteContentContext";
+import EditorToolbar from "@/components/editor/EditorToolbar";
 
 export default function Home() {
   return (
     <ThemeProvider>
       <ModalProvider>
-        <SmoothScroll />
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <WhatWeDo />
-        <Methodology />
-        <FeaturedProjects />
-        <Portfolio />
-        <Territory />
-        <Testimonials />
-      </main>
-      <Footer />
-      <QualificationModal />
+        <SiteContentProvider>
+          <EditorToolbar />
+          <SmoothScroll />
+          <Header />
+          <main>
+            <Hero />
+            <About />
+            <WhatWeDo />
+            <Methodology />
+            <FeaturedProjects />
+            <Portfolio />
+            <Territory />
+            <Testimonials />
+          </main>
+          <Footer />
+          <QualificationModal />
+        </SiteContentProvider>
       </ModalProvider>
     </ThemeProvider>
   );

@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
 import { useModal } from "@/context/ModalContext";
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-const links = [
+const defaultLinks = [
   { label: "Início", href: "#hero" },
   { label: "Método", href: "#metodo" },
   { label: "Serviços", href: "#servicos" },
@@ -19,6 +21,9 @@ export default function Header() {
   const [activeHash, setActiveHash] = useState("#hero");
   const { theme } = useTheme();
   const { openModal } = useModal();
+  const { content, isEditMode } = useSiteContent();
+
+  const links = content?.header?.links || defaultLinks;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -38,14 +43,14 @@ export default function Header() {
       { rootMargin: "-20% 0px -80% 0px" }
     );
 
-    links.forEach((link) => {
+    links.forEach((link: any) => {
       const id = link.href.replace("#", "");
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [links]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -98,10 +103,11 @@ export default function Header() {
           style={{ display: "flex", alignItems: "center", gap: "40px" }}
           className="hidden lg:flex"
         >
-          {links.map((l) => (
+          {links.map((l: any, i: number) => (
             <a
-              key={l.label}
+              key={l.href || i}
               href={l.href}
+              onClick={(e) => { if (isEditMode) e.preventDefault(); }}
               style={{
                 fontFamily: "var(--font-sans)",
                 fontSize: "11px",
@@ -112,21 +118,26 @@ export default function Header() {
                 opacity: activeHash === l.href ? 1 : 0.6,
                 textDecoration: "none",
                 transition: "all 0.3s ease",
+                cursor: isEditMode ? "default" : "pointer"
               }}
               onMouseEnter={(e) => {
-                if (activeHash !== l.href) {
+                if (activeHash !== l.href && !isEditMode) {
                   e.currentTarget.style.opacity = "1";
                   e.currentTarget.style.color = "var(--c-text)";
                 }
               }}
               onMouseLeave={(e) => {
-                if (activeHash !== l.href) {
+                if (activeHash !== l.href && !isEditMode) {
                   e.currentTarget.style.opacity = "0.6";
                   e.currentTarget.style.color = "var(--c-text)";
                 }
               }}
             >
-              {l.label}
+              <EditableText
+                fieldPath={`header.links.${i}.label`}
+                as="span"
+                fallback={l.label}
+              />
             </a>
           ))}
         </nav>
@@ -134,7 +145,10 @@ export default function Header() {
         {/* CTA + Burger */}
         <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
           <button
-            onClick={openModal}
+            onClick={(e) => {
+              if (isEditMode) e.preventDefault();
+              else openModal();
+            }}
             className="hidden lg:inline-flex"
             style={{
               alignItems: "center",
@@ -149,19 +163,27 @@ export default function Header() {
               fontWeight: 500,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              cursor: "pointer",
+              cursor: isEditMode ? "default" : "pointer",
               transition: "transform 0.2s ease, opacity 0.2s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.04)";
-              e.currentTarget.style.opacity = "0.9";
+              if (!isEditMode) {
+                e.currentTarget.style.transform = "scale(1.04)";
+                e.currentTarget.style.opacity = "0.9";
+              }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.opacity = "1";
+              if (!isEditMode) {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.opacity = "1";
+              }
             }}
           >
-            Vamos Conversar
+            <EditableText
+              fieldPath="header.cta"
+              as="span"
+              fallback="Vamos Conversar"
+            />
           </button>
 
           <button
@@ -196,9 +218,9 @@ export default function Header() {
             transition={{ duration: 0.35 }}
           >
             <nav style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "40px" }}>
-              {links.map((l, i) => (
+              {links.map((l: any, i: number) => (
                 <motion.a
-                  key={l.label}
+                  key={l.href || i}
                   href={l.href}
                   onClick={() => setOpen(false)}
                   style={{

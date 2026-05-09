@@ -2,37 +2,47 @@
 
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-
-const limits = [
-  "A Gaki não produz conteúdo sem estratégia definida.",
-  "Não cria identidade visual desconectada do posicionamento.",
-  "Não promete resultados baseados em volume ou viralização.",
-  "Não aceita projetos sem alinhamento de propósito.",
-];
-
-const profile = [
-  "Negócio em crescimento com produto ou serviço já validado",
-  "Reconhece que comunicação é investimento, não custo",
-  "Busca parceiro estratégico, não apenas executor",
-  "Tem abertura para processo — diagnóstico antes de execução",
-  "Valoriza clareza e autenticidade acima de tendências",
-];
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 function Block({
   id,
-  label,
-  title,
-  left,
-  right,
+  labelPath,
+  defaultLabel,
+  titlePath,
+  defaultTitle,
+  titleHighlightPath,
+  defaultTitleHighlight,
+  titlePrefix,
+  titleSuffix,
+  icon,
+  itemsPath,
+  defaultItems,
+  statementPath,
+  defaultStatement,
+  closePath,
+  defaultClose,
 }: {
   id?: string;
-  label: string;
-  title: React.ReactNode;
-  left: { icon: string; items: string[] };
-  right: { statement: string; close: string };
+  labelPath: string;
+  defaultLabel: string;
+  titlePath: string;
+  defaultTitle: string;
+  titleHighlightPath: string;
+  defaultTitleHighlight: string;
+  titlePrefix: string;
+  titleSuffix: string;
+  icon: string;
+  itemsPath: string;
+  defaultItems: string[];
+  statementPath?: string;
+  defaultStatement?: string;
+  closePath: string;
+  defaultClose: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { isEditMode } = useSiteContent();
 
   return (
     <div id={id} ref={ref} style={{ padding: "clamp(64px, 10vw, 100px) 0", position: "relative" }}>
@@ -41,25 +51,62 @@ function Block({
       />
 
       <div className="section-inner">
-        <motion.p
-          className="t-label"
-          style={{ color: "var(--c-text)", opacity: 0.38, marginBottom: "clamp(24px, 4vw, 40px)" }}
+        <motion.div
+          style={{ marginBottom: "clamp(24px, 4vw, 40px)" }}
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 0.5 } : { opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
-          {label}
-        </motion.p>
+          <EditableText
+            fieldPath={labelPath}
+            as="p"
+            className="t-label"
+            style={{ color: "var(--c-text)", opacity: 0.38 }}
+            fallback={defaultLabel}
+          />
+        </motion.div>
 
-        <motion.p
-          className="t-headline"
-          style={{ color: "var(--c-text)", maxWidth: "800px", marginBottom: "clamp(40px, 6vw, 64px)" }}
+        <motion.div
+          style={{ maxWidth: "800px", marginBottom: "clamp(40px, 6vw, 64px)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, delay: 0.12 }}
         >
-          {title}
-        </motion.p>
+          <p className="t-headline" style={{ color: "var(--c-text)" }}>
+            {titlePrefix}{" "}
+            {isEditMode ? (
+              <>
+                <EditableText
+                  fieldPath={titlePath}
+                  as="span"
+                  fallback={defaultTitle}
+                />{" "}
+                <EditableText
+                  fieldPath={titleHighlightPath}
+                  as="span"
+                  style={{ color: "var(--c-primary)" }}
+                  fallback={defaultTitleHighlight}
+                />
+              </>
+            ) : (
+              <>
+                <EditableText
+                  fieldPath={titlePath}
+                  as="span"
+                  fallback={defaultTitle}
+                />{" "}
+                <span style={{ color: "var(--c-primary)" }}>
+                  <EditableText
+                    fieldPath={titleHighlightPath}
+                    as="span"
+                    fallback={defaultTitleHighlight}
+                  />
+                </span>
+              </>
+            )}
+            {titleSuffix}
+          </p>
+        </motion.div>
 
         <div className="grid-2col">
           {/* Items */}
@@ -69,16 +116,20 @@ function Block({
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.28 }}
           >
-            {left.items.map((item, i) => (
+            {defaultItems.map((item, i) => (
               <li key={i} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
                 <span style={{ color: "var(--c-text)", opacity: 0.25, fontSize: "11px", marginTop: "4px", flexShrink: 0 }}>
-                  {left.icon}
+                  {icon}
                 </span>
                 <span
                   className="t-body"
                   style={{ color: "var(--c-text)", opacity: 0.72 }}
                 >
-                  {item}
+                  <EditableText
+                    fieldPath={`${itemsPath}.${i}`}
+                    as="span"
+                    fallback={item}
+                  />
                 </span>
               </li>
             ))}
@@ -91,15 +142,18 @@ function Block({
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.44 }}
           >
-            {right.statement && (
-              <p
+            {statementPath && (
+              <EditableText
+                fieldPath={statementPath}
+                as="p"
                 className="t-body"
                 style={{ color: "var(--c-text)", opacity: 0.55 }}
-              >
-                {right.statement}
-              </p>
+                fallback={defaultStatement}
+              />
             )}
-            <p
+            <EditableText
+              fieldPath={closePath}
+              as="p"
               style={{
                 fontFamily: "var(--font-serif)",
                 fontStyle: "italic",
@@ -109,9 +163,8 @@ function Block({
                 color: "var(--c-text)",
                 opacity: 0.82,
               }}
-            >
-              {right.close}
-            </p>
+              fallback={defaultClose}
+            />
           </motion.div>
         </div>
       </div>
@@ -120,27 +173,60 @@ function Block({
 }
 
 export default function Territory() {
+  const { content } = useSiteContent();
+
+  const defaultLimits = [
+    "A Gaki não produz conteúdo sem estratégia definida.",
+    "Não cria identidade visual desconectada do posicionamento.",
+    "Não promete resultados baseados em volume ou viralização.",
+    "Não aceita projetos sem alinhamento de propósito.",
+  ];
+
+  const defaultProfile = [
+    "Negócio em crescimento com produto ou serviço já validado",
+    "Reconhece que comunicação é investimento, não custo",
+    "Busca parceiro estratégico, não apenas executor",
+    "Tem abertura para processo — diagnóstico antes de execução",
+    "Valoriza clareza e autenticidade acima de tendências",
+  ];
+
+  const limits = content?.territory?.limits?.items || defaultLimits;
+  const profile = content?.territory?.profile?.items || defaultProfile;
+
   return (
     <section style={{ backgroundColor: "var(--c-bg)" }}>
       <Block
-        label="Limites"
-        title={<>Saber o que <span style={{ color: "var(--c-primary)" }}>não fazer</span> também é parte do método.</>}
-        left={{ icon: "✕", items: limits }}
-        right={{
-          statement: "",
-          close: "Esse limite não é rigidez. É coerência.",
-        }}
+        labelPath="territory.limits.label"
+        defaultLabel="Limites"
+        titlePath="territory.limits.title"
+        defaultTitle="Saber o que"
+        titleHighlightPath="territory.limits.titleHighlight"
+        defaultTitleHighlight="não fazer"
+        titlePrefix=""
+        titleSuffix=" também é parte do método."
+        icon="✕"
+        itemsPath="territory.limits.items"
+        defaultItems={limits}
+        closePath="territory.limits.close"
+        defaultClose="Esse limite não é rigidez. É coerência."
       />
       <Block
         id="para-quem"
-        label="Para Quem É"
-        title={<>Não trabalhamos com todo tipo de empresa. Trabalhamos com o <span style={{ color: "var(--c-primary)" }}>tipo certo.</span></>}
-        left={{ icon: "◆", items: profile }}
-        right={{
-          statement:
-            "Se esse perfil não é familiar, provavelmente não somos a escolha certa.",
-          close: "Se é familiar, a conversa vale.",
-        }}
+        labelPath="territory.profile.label"
+        defaultLabel="Para Quem É"
+        titlePath="territory.profile.title"
+        defaultTitle="Não trabalhamos com todo tipo de empresa. Trabalhamos com o"
+        titleHighlightPath="territory.profile.titleHighlight"
+        defaultTitleHighlight="tipo certo."
+        titlePrefix=""
+        titleSuffix=""
+        icon="◆"
+        itemsPath="territory.profile.items"
+        defaultItems={profile}
+        statementPath="territory.profile.statement"
+        defaultStatement="Se esse perfil não é familiar, provavelmente não somos a escolha certa."
+        closePath="territory.profile.close"
+        defaultClose="Se é familiar, a conversa vale."
       />
     </section>
   );

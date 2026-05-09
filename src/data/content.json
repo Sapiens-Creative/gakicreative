@@ -1,0 +1,189 @@
+{
+  "hero": {
+    "label": "Agência-estúdio de comunicação estratégica",
+    "headlineLine1": "Sua empresa",
+    "headlineLine2": "está funcionando.",
+    "headlineLine3": "A comunicação,",
+    "headlineLine4": "nem sempre.",
+    "sub": "Design, conteúdo e consultoria —",
+    "subHighlight": "integrados ou por demanda.",
+    "cta": "Ver como trabalhamos"
+  },
+  "about": {
+    "label": "Quem somos",
+    "headline": "Gaki é um estúdio-agência de",
+    "headlineHighlight": "comunicação estratégica.",
+    "paragraph1": "Nascemos da observação de um padrão: empresas que entregam bem, mas comunicam abaixo do que merecem. O problema raramente é produto — é ausência de direção estratégica na comunicação.",
+    "paragraph1Highlight": "ausência de direção estratégica",
+    "paragraph2": "Integramos diagnóstico, identidade visual, conteúdo e consultoria em uma lógica única: antes de produzir qualquer coisa, entendemos o contexto. Só então executamos.",
+    "paragraph2Highlight": "entendemos o contexto",
+    "linkText": "Ver para quem trabalhamos →",
+    "visionLabel": "Nossa visão",
+    "quote": "Comunicação que ajuda antes de vender. Que posiciona o cliente como protagonista. Que converte pela clareza — não pela pressão.",
+    "quoteHighlights": ["ajuda antes de vender", "protagonista", "clareza"],
+    "philosophy": "Marketing Natural — a filosofia da Gaki"
+  },
+  "whatWeDo": {
+    "blocks": [
+      {
+        "label": "O Espelho",
+        "title": "Existe um padrão que se repete em empresas que estão crescendo.",
+        "paragraphs": [
+          "O produto funciona. O time funciona. As vendas acontecem — às vezes por esforço puro, às vezes por indicação.",
+          "Mas, em algum momento, surge uma percepção incômoda: a comunicação não acompanha o que o negócio entrega de verdade.",
+          "A identidade visual ficou no passado. O conteúdo existe, mas parece aleatório. O posicionamento nunca foi definido com clareza — funcionou sem isso por um tempo, mas já não funciona mais.",
+          "Não é crise. É crescimento sem comunicação proporcional."
+        ]
+      },
+      {
+        "label": "O Diagnóstico Silencioso",
+        "title": "O problema raramente é execução. É ausência de direção.",
+        "paragraphs": [
+          "A maioria das empresas não precisa de mais conteúdo. Precisa de conteúdo certo. Não precisa de mais identidade visual. Precisa de uma que comunique o que a empresa realmente é. Não precisa de mais presença digital. Precisa de presença com sentido.",
+          "A execução sem estratégia gera trabalho. A estratégia sem execução gera planos. O que resolve é a integração entre os dois."
+        ]
+      }
+    ]
+  },
+  "methodology": {
+    "label": "O Método",
+    "headline": "Antes de produzir qualquer coisa, entendemos o contexto.",
+    "paragraph1": "Esse é o ponto de partida da Gaki.",
+    "paragraph2": "O que orienta cada projeto é o Marketing Natural: comunicação que ajuda antes de vender, que posiciona o cliente como protagonista e que converte pela clareza — não pela pressão.",
+    "practiceLabel": "Na prática:",
+    "items": [
+      "Diagnóstico antes de qualquer entrega",
+      "Escopo claro e justificado",
+      "Comunicação direta em todo o processo",
+      "Resultado que faz sentido para o negócio, não apenas para o portfólio"
+    ]
+  },
+  "featuredProjects": {
+    "label": "Frentes de Serviço",
+    "headline": "Três frentes. Uma só lógica.",
+    "services": [
+      {
+        "num": "01",
+        "title": "Estúdio",
+        "italic": "",
+        "description": "Criação de identidade visual, branding e materiais gráficos. O trabalho visual é orientado pelo posicionamento. A estética serve à estratégia — nunca o contrário.",
+        "note": "Para empresas que precisam que a imagem comunique o que o negócio realmente entrega."
+      },
+      {
+        "num": "02",
+        "title": "Conteúdo",
+        "italic": "e Social",
+        "description": "Planejamento editorial, produção de conteúdo e gestão de redes sociais. O foco é consistência e relevância ao longo do tempo — não volume ou viralização.",
+        "note": "Para empresas que precisam de presença contínua com sentido, não apenas com frequência."
+      },
+      {
+        "num": "03",
+        "title": "Consultoria",
+        "italic": "",
+        "description": "Diagnóstico de comunicação, definição de posicionamento e arquitetura de mensagem. O ponto de entrada natural para quem precisa entender onde está antes de decidir para onde vai.",
+        "note": "Para empresas que sabem que algo precisa mudar, mas ainda não sabem exatamente o quê."
+      }
+    ],
+    "footer": "Cada frente pode operar de forma independente ou integrada, de acordo com o momento do seu negócio."
+  },
+  "portfolio": {
+    "label": "Trabalhos",
+    "headline": "Cases em construção.",
+    "description": "Nossos cases completos serão publicados em breve. Entre em contato para conhecer projetos realizados.",
+    "projects": [
+      {
+        "num": "01",
+        "client": "Cliente A",
+        "type": "Identidade Visual + Consultoria",
+        "result": "Reposicionamento completo da marca em 3 meses",
+        "soon": true
+      },
+      {
+        "num": "02",
+        "client": "Cliente B",
+        "type": "Conteúdo + Social",
+        "result": "Presença digital consistente com foco em relevância",
+        "soon": true
+      },
+      {
+        "num": "03",
+        "client": "Cliente C",
+        "type": "Estúdio + Conteúdo",
+        "result": "Identidade e comunicação alinhadas ao produto",
+        "soon": true
+      }
+    ]
+  },
+  "territory": {
+    "limits": {
+      "label": "Limites",
+      "title": "Saber o que não fazer também é parte do método.",
+      "titleHighlight": "não fazer",
+      "items": [
+        "A Gaki não produz conteúdo sem estratégia definida.",
+        "Não cria identidade visual desconectada do posicionamento.",
+        "Não promete resultados baseados em volume ou viralização.",
+        "Não aceita projetos sem alinhamento de propósito."
+      ],
+      "close": "Esse limite não é rigidez. É coerência."
+    },
+    "profile": {
+      "label": "Para Quem É",
+      "title": "Não trabalhamos com todo tipo de empresa. Trabalhamos com o tipo certo.",
+      "titleHighlight": "tipo certo.",
+      "items": [
+        "Negócio em crescimento com produto ou serviço já validado",
+        "Reconhece que comunicação é investimento, não custo",
+        "Busca parceiro estratégico, não apenas executor",
+        "Tem abertura para processo — diagnóstico antes de execução",
+        "Valoriza clareza e autenticidade acima de tendências"
+      ],
+      "statement": "Se esse perfil não é familiar, provavelmente não somos a escolha certa.",
+      "close": "Se é familiar, a conversa vale."
+    }
+  },
+  "testimonials": {
+    "label": "O que dizem",
+    "headline": "Clientes que encontraram direção.",
+    "items": [
+      {
+        "quote": "A Gaki não entregou só uma identidade visual — entregou clareza. Depois do processo, ficou fácil explicar para qualquer pessoa o que a gente faz e por que vale a pena.",
+        "name": "Nome do Cliente",
+        "role": "CEO",
+        "company": "Empresa"
+      },
+      {
+        "quote": "O que diferenciou a Gaki foi o diagnóstico antes de qualquer execução. Eles entenderam o nosso negócio antes de propor qualquer solução. Isso faz toda a diferença.",
+        "name": "Nome do Cliente",
+        "role": "Fundadora",
+        "company": "Empresa"
+      },
+      {
+        "quote": "Buscávamos um parceiro estratégico, não apenas um executor. A Gaki entendeu exatamente isso desde o início. Trabalho integrado, com sentido em cada etapa.",
+        "name": "Nome do Cliente",
+        "role": "Diretor de Marketing",
+        "company": "Empresa"
+      }
+    ]
+  },
+  "footer": {
+    "label": "O próximo passo",
+    "headline": "Se fez sentido até aqui, o próximo passo é simples.",
+    "body": "Uma conversa. Sem proposta genérica, sem compromisso imediato. Só um bate-papo para entender onde sua comunicação está e se faz sentido trabalharmos juntos.",
+    "ctaMega1": "Vamos",
+    "ctaMega2": "conversar?",
+    "ctaButton": "Entrar em contato",
+    "linkChat": "Quero conversar",
+    "linkWork": "Ver nossos trabalhos",
+    "copyright": "© 2026 Gaki Comunicação Estratégica — São Paulo, Brasil"
+  },
+  "header": {
+    "links": [
+      { "label": "Início", "href": "#hero" },
+      { "label": "Método", "href": "#metodo" },
+      { "label": "Serviços", "href": "#servicos" },
+      { "label": "Para quem", "href": "#para-quem" }
+    ],
+    "cta": "Vamos Conversar"
+  }
+}

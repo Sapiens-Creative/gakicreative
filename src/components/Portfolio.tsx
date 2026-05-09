@@ -2,8 +2,10 @@
 
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-const projects = [
+const defaultProjects = [
   {
     num: "01",
     client: "Cliente A",
@@ -32,10 +34,12 @@ const projects = [
 
 function ProjectCard({
   project,
+  index,
   delay,
   inView,
 }: {
-  project: typeof projects[0];
+  project: any;
+  index: number;
   delay: number;
   inView: boolean;
 }) {
@@ -55,7 +59,7 @@ function ProjectCard({
         overflow: "hidden",
         cursor: "default",
         aspectRatio: "4/3",
-        background: project.grad,
+        background: project.grad || defaultProjects[index]?.grad || "rgba(0,0,0,0.1)",
       }}
     >
       {/* Content */}
@@ -103,7 +107,7 @@ function ProjectCard({
 
         {/* Bottom info */}
         <div>
-          <motion.p
+          <motion.div
             style={{
               fontFamily: "var(--font-serif)",
               fontStyle: "italic",
@@ -115,10 +119,16 @@ function ProjectCard({
             animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 12 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            {project.result}
-          </motion.p>
+            <EditableText
+              fieldPath={`portfolio.projects.${index}.result`}
+              as="p"
+              fallback={project.result}
+            />
+          </motion.div>
 
-          <p
+          <EditableText
+            fieldPath={`portfolio.projects.${index}.client`}
+            as="p"
             style={{
               fontFamily: "var(--font-sans)",
               fontSize: "clamp(1rem, 1.8vw, 1.4rem)",
@@ -127,10 +137,11 @@ function ProjectCard({
               letterSpacing: "-0.01em",
               lineHeight: 1.15,
             }}
-          >
-            {project.client}
-          </p>
-          <p
+            fallback={project.client}
+          />
+          <EditableText
+            fieldPath={`portfolio.projects.${index}.type`}
+            as="p"
             style={{
               fontFamily: "var(--font-sans)",
               fontSize: "11px",
@@ -139,9 +150,8 @@ function ProjectCard({
               letterSpacing: "0.06em",
               marginTop: "6px",
             }}
-          >
-            {project.type}
-          </p>
+            fallback={project.type}
+          />
         </div>
       </div>
 
@@ -163,6 +173,8 @@ function ProjectCard({
 export default function Portfolio() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const { content } = useSiteContent();
+  const projects = content?.portfolio?.projects || defaultProjects;
 
   return (
     <section
@@ -195,35 +207,48 @@ export default function Portfolio() {
           }}
         >
           <div>
-            <motion.p
-              className="t-label"
-              style={{ color: "var(--c-text)", opacity: 0.38, marginBottom: "16px" }}
+            <motion.div
+              style={{ marginBottom: "16px" }}
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 0.5 } : { opacity: 0 }}
               transition={{ duration: 0.7 }}
             >
-              Trabalhos
-            </motion.p>
-            <motion.p
-              className="t-headline"
-              style={{ color: "var(--c-text)", maxWidth: "560px" }}
+              <EditableText
+                fieldPath="portfolio.label"
+                as="p"
+                className="t-label"
+                style={{ color: "var(--c-text)" }}
+                fallback="Trabalhos"
+              />
+            </motion.div>
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.7, delay: 0.12 }}
             >
-              Cases em construção.
-            </motion.p>
+              <EditableText
+                fieldPath="portfolio.headline"
+                as="p"
+                className="t-headline"
+                style={{ color: "var(--c-text)", maxWidth: "560px" }}
+                fallback="Cases em construção."
+              />
+            </motion.div>
           </div>
 
-          <motion.p
-            className="t-body"
-            style={{ color: "var(--c-text)", opacity: 0.42, maxWidth: "320px", textAlign: "right" }}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 0.42 } : { opacity: 0 }}
             transition={{ duration: 0.7, delay: 0.25 }}
           >
-            Nossos cases completos serão publicados em breve. Entre em contato para conhecer projetos realizados.
-          </motion.p>
+            <EditableText
+              fieldPath="portfolio.description"
+              as="p"
+              className="t-body"
+              style={{ color: "var(--c-text)", maxWidth: "320px", textAlign: "right" }}
+              fallback="Nossos cases completos serão publicados em breve. Entre em contato para conhecer projetos realizados."
+            />
+          </motion.div>
         </div>
 
         {/* Grid */}
@@ -234,8 +259,8 @@ export default function Portfolio() {
             gap: "clamp(16px, 2vw, 24px)",
           }}
         >
-          {projects.map((p, i) => (
-            <ProjectCard key={p.num} project={p} delay={0.2 + i * 0.1} inView={inView} />
+          {projects.map((p: any, i: number) => (
+            <ProjectCard key={p.num || i} project={p} index={i} delay={0.2 + i * 0.1} inView={inView} />
           ))}
         </div>
       </div>

@@ -4,12 +4,15 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedText from "./AnimatedText";
 import LightRays from "./LightRays";
+import EditableText from "./editor/EditableText";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const textY  = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const { content, isEditMode } = useSiteContent();
 
   return (
     <section
@@ -57,78 +60,131 @@ export default function Hero() {
         }}
       >
         {/* Label */}
-        <motion.p
-          className="t-label"
+        <motion.div
           style={{
-            color: "var(--c-text)",
-            opacity: 0.5,
             marginBottom: "clamp(24px, 4vw, 40px)",
           }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 0.5, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          Agência-estúdio de comunicação estratégica
-        </motion.p>
+          <EditableText
+            fieldPath="hero.label"
+            as="p"
+            className="t-label"
+            style={{
+              color: "var(--c-text)",
+              opacity: 0.5,
+            }}
+            fallback="Agência-estúdio de comunicação estratégica"
+          />
+        </motion.div>
 
         {/* Headline */}
         <h1 className="t-hero" style={{ color: "var(--c-text)" }}>
-          <AnimatedText
-            text="Sua empresa"
-            as="span"
-            className="block"
-            delay={0.4}
-            by="word"
-          />
-          <AnimatedText
-            text="está funcionando."
-            as="span"
-            className="block"
-            delay={0.65}
-            by="word"
-          />
-          <span
-            style={{
-              display: "block",
-              fontFamily: "var(--font-serif)",
-              fontStyle: "italic",
-              fontWeight: 400,
-            }}
-          >
-            <AnimatedText
-              text="A comunicação,"
-              as="span"
-              className=""
-              delay={0.9}
-              by="word"
-            />
-          </span>
-          <span
-            style={{
-              display: "block",
-              fontFamily: "var(--font-serif)",
-              fontStyle: "italic",
-              fontWeight: 400,
-              opacity: 1,
-            }}
-          >
-            <AnimatedText
-              text="nem sempre."
-              as="span"
-              className=""
-              delay={1.1}
-              by="word"
-              style={{ color: "var(--c-primary)" }}
-            />
-          </span>
+          {isEditMode ? (
+            <>
+              <EditableText
+                fieldPath="hero.headlineLine1"
+                as="span"
+                className="block"
+                style={{ display: "block" }}
+                fallback="Sua empresa"
+              />
+              <EditableText
+                fieldPath="hero.headlineLine2"
+                as="span"
+                className="block"
+                style={{ display: "block" }}
+                fallback="está funcionando."
+              />
+              <span
+                style={{
+                  display: "block",
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                }}
+              >
+                <EditableText
+                  fieldPath="hero.headlineLine3"
+                  as="span"
+                  fallback="A comunicação,"
+                />
+              </span>
+              <span
+                style={{
+                  display: "block",
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                }}
+              >
+                <EditableText
+                  fieldPath="hero.headlineLine4"
+                  as="span"
+                  style={{ color: "var(--c-primary)" }}
+                  fallback="nem sempre."
+                />
+              </span>
+            </>
+          ) : (
+            <>
+              <AnimatedText
+                text={content?.hero?.headlineLine1 ?? "Sua empresa"}
+                as="span"
+                className="block"
+                delay={0.4}
+                by="word"
+              />
+              <AnimatedText
+                text={content?.hero?.headlineLine2 ?? "está funcionando."}
+                as="span"
+                className="block"
+                delay={0.65}
+                by="word"
+              />
+              <span
+                style={{
+                  display: "block",
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                }}
+              >
+                <AnimatedText
+                  text={content?.hero?.headlineLine3 ?? "A comunicação,"}
+                  as="span"
+                  className=""
+                  delay={0.9}
+                  by="word"
+                />
+              </span>
+              <span
+                style={{
+                  display: "block",
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  opacity: 1,
+                }}
+              >
+                <AnimatedText
+                  text={content?.hero?.headlineLine4 ?? "nem sempre."}
+                  as="span"
+                  className=""
+                  delay={1.1}
+                  by="word"
+                  style={{ color: "var(--c-primary)" }}
+                />
+              </span>
+            </>
+          )}
         </h1>
 
         {/* Sub */}
-        <motion.p
-          className="t-body"
+        <motion.div
           style={{
-            color: "var(--c-text)",
-            opacity: 0.5,
             maxWidth: "520px",
             margin: "clamp(24px, 4vw, 36px) auto 0",
           }}
@@ -136,8 +192,20 @@ export default function Hero() {
           animate={{ opacity: 0.5, y: 0 }}
           transition={{ duration: 0.9, delay: 1.5 }}
         >
-          Design, conteúdo e consultoria — <span style={{ color: "var(--c-primary)", fontWeight: 500 }}>integrados ou por demanda.</span>
-        </motion.p>
+          <p className="t-body" style={{ color: "var(--c-text)", opacity: 0.5 }}>
+            <EditableText
+              fieldPath="hero.sub"
+              as="span"
+              fallback="Design, conteúdo e consultoria —"
+            />{" "}
+            <EditableText
+              fieldPath="hero.subHighlight"
+              as="span"
+              style={{ color: "var(--c-primary)", fontWeight: 500 }}
+              fallback="integrados ou por demanda."
+            />
+          </p>
+        </motion.div>
 
         {/* CTA */}
         <motion.div
@@ -164,7 +232,11 @@ export default function Hero() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
           >
-            Ver como trabalhamos
+            <EditableText
+              fieldPath="hero.cta"
+              as="span"
+              fallback="Ver como trabalhamos"
+            />
           </a>
           <motion.span
             style={{
