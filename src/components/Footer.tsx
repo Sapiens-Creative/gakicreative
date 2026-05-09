@@ -69,7 +69,7 @@ export default function Footer() {
         >
           <p
             className="t-label"
-            style={{ color: "var(--c-text-inv)", opacity: 0.35, marginBottom: "clamp(20px, 3vw, 32px)" }}
+            style={{ color: "var(--c-text-inv)", opacity: 0.5, marginBottom: "clamp(20px, 3vw, 32px)" }}
           >
             O próximo passo
           </p>
@@ -81,7 +81,7 @@ export default function Footer() {
           </p>
           <p
             className="t-body"
-            style={{ color: "var(--c-text-inv)", opacity: 0.55 }}
+            style={{ color: "var(--c-text-inv)", opacity: 0.65 }}
           >
             Uma conversa. Sem proposta genérica, sem compromisso imediato. Só um
             bate-papo para entender onde sua comunicação está e se faz sentido
@@ -254,7 +254,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Logo e Copyright */}
-        <div style={{ marginTop: "clamp(32px, 5vw, 60px)" }}>
+        <div style={{ marginTop: "clamp(24px, 3vw, 40px)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/gaki-logo.svg"

@@ -58,7 +58,7 @@ export default function FeaturedProjects() {
           className="t-label"
           style={{ color: "var(--c-text)", opacity: 0.4, marginBottom: "24px" }}
           initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 0.4 } : { opacity: 0 }}
+          animate={inView ? { opacity: 0.5 } : { opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
           Frentes de Serviço
@@ -190,7 +190,7 @@ export default function FeaturedProjects() {
               marginTop: "32px",
             }}
             initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 0.38 } : { opacity: 0 }}
+            animate={inView ? { opacity: 0.45 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
             Cada frente pode operar de forma independente ou integrada, de acordo com o momento do seu negócio.

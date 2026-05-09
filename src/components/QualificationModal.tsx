@@ -137,11 +137,11 @@ export default function QualificationModal() {
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ height: "100%", backgroundColor: "var(--primary)", boxShadow: "0 0 10px var(--primary)" }}
+                style={{ height: "100%", backgroundColor: "#2E7D5F", boxShadow: "0 0 10px rgba(46,125,95,0.5)" }}
               />
             </div>
             {!rejection && !isFinished && (
-              <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#FFFFFF", opacity: 0.8, marginTop: "12px", fontFamily: "var(--font-sans)", fontWeight: 600 }}>
+              <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#EDE3D5", opacity: 0.8, marginTop: "12px", fontFamily: "var(--font-sans)", fontWeight: 600 }}>
                 Etapa {currentIndex + 1} de {qualificationQuestions.length}
               </p>
             )}
@@ -149,7 +149,7 @@ export default function QualificationModal() {
           <button 
             onClick={closeModal}
             aria-label="Fechar"
-            style={{ background: "none", border: "none", fontSize: "28px", lineHeight: 1, color: "var(--foreground)", cursor: "pointer", opacity: 0.3, transition: "opacity 0.2s" }}
+            style={{ background: "none", border: "none", fontSize: "28px", lineHeight: 1, color: "#EDE3D5", cursor: "pointer", opacity: 0.5, transition: "opacity 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
           >
@@ -177,16 +177,16 @@ export default function QualificationModal() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
               >
-                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--foreground)" }}>Pausa.</h3>
-                <p className="t-body" style={{ color: "var(--foreground)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
+                <h3 className="t-headline" style={{ marginBottom: "16px", color: "#EDE3D5" }}>Pausa.</h3>
+                <p className="t-body" style={{ color: "#EDE3D5", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
                   {rejection === "triagem" ? REJECTION_MESSAGE_TRIAGEM : REJECTION_MESSAGE_INVESTIMENTO}
                 </p>
                 <button
                   onClick={closeModal}
                   style={{
                     padding: "16px 32px",
-                    backgroundColor: "var(--primary)",
-                    color: "var(--primary-foreground)",
+                    backgroundColor: "#2E7D5F",
+                    color: "#FFFFFF",
                     border: "none",
                     borderRadius: "4px",
                     fontFamily: "var(--font-sans)",
@@ -206,8 +206,8 @@ export default function QualificationModal() {
                 exit={{ opacity: 0, x: -20 }}
                 style={{ textAlign: "center" }}
               >
-                <h3 className="t-headline" style={{ marginBottom: "16px", color: "var(--foreground)" }}>Tudo certo.</h3>
-                <p className="t-body" style={{ color: "var(--foreground)", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
+                <h3 className="t-headline" style={{ marginBottom: "16px", color: "#EDE3D5" }}>Tudo certo.</h3>
+                <p className="t-body" style={{ color: "#EDE3D5", opacity: 0.8, marginBottom: "32px", lineHeight: 1.6 }}>
                   Seu perfil foi mapeado. Clique abaixo para enviar essas informações diretamente para o nosso WhatsApp e iniciarmos a conversa.
                 </p>
                 <a
@@ -242,7 +242,7 @@ export default function QualificationModal() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25 }}
               >
-                <h2 className="t-card-title" style={{ marginBottom: "40px", color: "var(--foreground)", lineHeight: 1.35, fontWeight: 400 }}>
+                <h2 className="t-card-title" style={{ marginBottom: "40px", color: "#EDE3D5", lineHeight: 1.35, fontWeight: 400 }}>
                   {q.text}
                 </h2>
 
@@ -272,8 +272,8 @@ export default function QualificationModal() {
                           gap: "16px"
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "var(--primary)";
-                          e.currentTarget.style.backgroundColor = "rgba(183, 255, 0, 0.08)";
+                          e.currentTarget.style.borderColor = "#2E7D5F";
+                          e.currentTarget.style.backgroundColor = "rgba(46, 125, 95, 0.15)";
                           e.currentTarget.style.transform = "translateX(8px)";
                         }}
                         onMouseLeave={(e) => {
@@ -316,7 +316,7 @@ export default function QualificationModal() {
                         transition: "all 0.2s ease"
                       }}
                       onFocus={(e) => {
-                        e.currentTarget.style.borderColor = "var(--primary)";
+                        e.currentTarget.style.borderColor = "#2E7D5F";
                         e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
                       }}
                       onBlur={(e) => {
@@ -330,8 +330,8 @@ export default function QualificationModal() {
                       disabled={!textInput.trim()}
                       style={{
                         padding: "18px",
-                        backgroundColor: textInput.trim() ? "var(--primary)" : "rgba(255, 255, 255, 0.05)",
-                        color: textInput.trim() ? "black" : "rgba(255, 255, 255, 0.3)",
+                        backgroundColor: textInput.trim() ? "#2E7D5F" : "rgba(255, 255, 255, 0.05)",
+                        color: textInput.trim() ? "#FFFFFF" : "rgba(255, 255, 255, 0.3)",
                         opacity: textInput.trim() ? 1 : 0.5,
                         border: "none",
                         borderRadius: "8px",

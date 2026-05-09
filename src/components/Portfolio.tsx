@@ -199,7 +199,7 @@ export default function Portfolio() {
               className="t-label"
               style={{ color: "var(--c-text)", opacity: 0.38, marginBottom: "16px" }}
               initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 0.38 } : { opacity: 0 }}
+              animate={inView ? { opacity: 0.5 } : { opacity: 0 }}
               transition={{ duration: 0.7 }}
             >
               Trabalhos

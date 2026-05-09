@@ -55,7 +55,7 @@ export default function Header() {
   const navBg = scrolled
     ? theme === "dark"
       ? "rgba(10,10,10,0.88)"
-      : "rgba(240,240,240,0.88)"
+      : "rgba(237,227,213,0.92)"
     : "transparent";
 
   return (

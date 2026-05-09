@@ -45,7 +45,7 @@ function Block({
           className="t-label"
           style={{ color: "var(--c-text)", opacity: 0.38, marginBottom: "clamp(24px, 4vw, 40px)" }}
           initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 0.38 } : { opacity: 0 }}
+          animate={inView ? { opacity: 0.5 } : { opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
           {label}
