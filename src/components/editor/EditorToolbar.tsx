@@ -46,6 +46,19 @@ export default function EditorToolbar() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "logout" }),
+      });
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <div className="editor-toolbar">
@@ -76,6 +89,13 @@ export default function EditorToolbar() {
             disabled={!isDirty || saveStatus === "saving"}
           >
             {btnLabel()}
+          </button>
+          <div style={{ width: "1px", height: "16px", backgroundColor: "rgba(255,255,255,0.2)", margin: "0 8px" }} />
+          <button
+            className="editor-toolbar__btn editor-toolbar__btn--discard"
+            onClick={handleLogout}
+          >
+            Sair
           </button>
         </div>
       </div>

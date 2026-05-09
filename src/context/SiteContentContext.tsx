@@ -61,10 +61,14 @@ export function SiteContentProvider({
     "idle" | "saving" | "saved" | "error"
   >("idle");
 
-  // Detect ?edit=true
+  // Check for admin session
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setIsEditMode(params.get("edit") === "true");
+    fetch("/api/auth")
+      .then((r) => r.json())
+      .then((data) => {
+        setIsEditMode(data.isAuthenticated);
+      })
+      .catch(console.error);
   }, []);
 
   // Load content from API
